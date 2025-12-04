@@ -16,6 +16,7 @@ package rpccache
 
 import (
 	"context"
+
 	"github.com/openimsdk/open-im-server/v3/pkg/common/storage/cache/cachekey"
 	"github.com/openimsdk/open-im-server/v3/pkg/rpcli"
 	"github.com/openimsdk/protocol/relation"
@@ -55,7 +56,8 @@ func (f *FriendLocalCache) IsFriend(ctx context.Context, possibleFriendUserID, u
 	if err != nil {
 		return false, err
 	}
-	return res.InUser1Friends, nil
+	// Require mutual friendship - both users must be friends with each other
+	return res.InUser1Friends && res.InUser2Friends, nil
 }
 
 func (f *FriendLocalCache) isFriend(ctx context.Context, possibleFriendUserID, userID string) (val *relation.IsFriendResp, err error) {

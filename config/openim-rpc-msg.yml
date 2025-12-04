@@ -18,8 +18,8 @@ prometheus:
   ports:
 
 
-# Does sending messages require friend verification
-friendVerify: false
+#! Does sending messages require friend verification
+friendVerify: true
 
 ratelimiter:
   # Whether to enable rate limiting
